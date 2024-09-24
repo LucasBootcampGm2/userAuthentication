@@ -14,7 +14,9 @@ const redirectPage = (page) => {
 
 const usersTable = "SELECT * FROM users"
 
-function saveUserFullName() {}
+function saveFullName() {
+  
+}
 
 document
   .querySelector(".already-account-btn")
