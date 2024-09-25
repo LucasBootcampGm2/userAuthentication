@@ -10,7 +10,7 @@
   </head>
   <body>
     <main class="fade-in">
-      <form class="sign-form">
+      <form id="signinForm" class="sign-form">
         <h1 class="sign-title">Sign In</h1>
         <div class="input-container">
           <input
@@ -20,6 +20,7 @@
             class="input"
             placeholder="User name"
             autocomplete="off"
+            required
           />
           <input
             type="password"
@@ -28,6 +29,7 @@
             class="input"
             placeholder="Password"
             autocomplete="off"
+            required
           />
         </div>
         <button type="submit" class="submit-btn">Enter</button>
