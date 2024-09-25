@@ -1,26 +1,30 @@
-const body = document.querySelector("body")
-const fullnameInput = document.getElementById("fullname-input")
-const usernameInput = document.getElementById("username")
-const emailInput = document.getElementById("email-input")
-const passwordInput = document.getElementById("password")
-const confirmPasswordInput = document.getElementById("confirm-password")
+document.getElementById("signupForm").addEventListener("submit", async (event) => {
+  event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
 
-const redirectPage = (page) => {
-  body.classList.add("fade-out")
-  setTimeout(() => {
-    window.location.href = page
-  }, 500)
-}
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData.entries());
 
-const usersTable = "SELECT * FROM users"
+  try {
+    const response = await fetch("http://localhost:3000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-function saveFullName() {
-  
-}
+    const jsonResponse = await response.json();
 
-document
-  .querySelector(".already-account-btn")
-  .addEventListener("click", (e) => {
-    e.preventDefault()
-    redirectPage("./signin.html")
-  })
+    if (!response.ok) {
+      throw new Error(jsonResponse.message || "Error desconocido");
+    }
+
+    // Mostrar el mensaje de éxito
+    alert(jsonResponse.message);
+    // Aquí puedes redirigir al usuario o limpiar el formulario
+  } catch (error) {
+    // Manejar el error aquí
+    console.error("Error:", error);
+    alert(error.message);
+  }
+});
